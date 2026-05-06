@@ -24,7 +24,7 @@ export default function AttendancePage() {
   const [employees, setEmployees] = useState<Employee[]>([])
 
   const fetchData = async (values: AttendanceFilterValues) => {
-    const params = new URLSearchParams(values as any).toString()
+    const params = new URLSearchParams(values as Record<string, string>).toString()
     const res = await api.get(`/attendances?${params}`)
     setData(Array.isArray(res.data) ? res.data : [])
     }
@@ -39,7 +39,8 @@ export default function AttendancePage() {
       await api.post('/attendances/checkin', { employee_id })
       toast.success('Check-in berhasil')
       fetchData(form.getValues())
-    } catch (e: any) {
+    } catch (error: unknown) {
+      const e = error as { response?: { data?: { message?: string } } }
       toast.error(e?.response?.data?.message || 'Gagal check-in')
     }
   }
@@ -49,7 +50,8 @@ export default function AttendancePage() {
       await api.put(`/attendances/checkout/${attendance_id}`)
       toast.success('Check-out berhasil')
       fetchData(form.getValues())
-    } catch (e: any) {
+    } catch (error: unknown) {
+      const e = error as { response?: { data?: { message?: string } } }
       toast.error(e?.response?.data?.message || 'Gagal check-out')
     }
   }

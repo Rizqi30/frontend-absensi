@@ -47,9 +47,10 @@ export default function RegisterPage() {
       
       // Registrasi berhasil, redirect ke login
       router.push('/login')
-    } catch (error: any) {
-      if (error.response?.data?.message) {
-        setErrorMessage(error.response.data.message)
+    } catch (error: unknown) {
+      const e = error as { response?: { data?: { message?: string } } }
+      if (e.response?.data?.message) {
+        setErrorMessage(e.response.data.message)
       } else {
         setErrorMessage('Gagal mendaftar. Periksa kembali data Anda.')
       }

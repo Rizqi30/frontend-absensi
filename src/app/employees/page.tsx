@@ -7,6 +7,7 @@ import { useState } from 'react'
 import { Pencil, Trash2, Save } from 'lucide-react'
 import { employeeSchema, EmployeeSchema } from '@/utils/employee.schema'
 import { Employee } from '@/types/employee'
+import { Department } from '@/types/department'
 import { api } from '@/lib/api'
 import { toast } from 'sonner'
 
@@ -24,7 +25,7 @@ export default function EmployeePage() {
     refetchOnWindowFocus: false,
   })
 
-  const { data: departments } = useQuery({
+  const { data: departments } = useQuery<Department[]>({
     queryKey: ['departments'],
     queryFn: async () => {
       const res = await api.get('/departments')
@@ -120,7 +121,7 @@ export default function EmployeePage() {
                 <label className="block text-sm font-semibold text-slate-700 mb-1.5">Departemen</label>
                 <select {...register('departement_id')} defaultValue="" className="w-full bg-slate-50 border border-slate-200 text-slate-800 rounded-lg px-4 py-2.5 focus:bg-white focus:border-blue-400 focus:ring-4 focus:ring-blue-100 focus:outline-none transition-all text-sm">
                   <option value="" disabled hidden>-- Pilih Departemen --</option>
-                  {(departments ?? []).map((d: any) => (
+                  {(departments ?? []).map((d: Department) => (
                     <option key={d.id} value={d.id}>{d.departement_name}</option>
                   ))}
                 </select>

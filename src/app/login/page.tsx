@@ -42,9 +42,10 @@ export default function LoginPage() {
       
       router.push('/')
       router.refresh()
-    } catch (error: any) {
-      if (error.response?.data?.message) {
-        setErrorMessage(error.response.data.message)
+    } catch (error: unknown) {
+      const e = error as { response?: { data?: { message?: string } } }
+      if (e.response?.data?.message) {
+        setErrorMessage(e.response.data.message)
       } else {
         setErrorMessage('Gagal masuk. Periksa kembali email dan password Anda.')
       }

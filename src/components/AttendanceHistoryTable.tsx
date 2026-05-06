@@ -2,9 +2,9 @@
 
 import React, { useState, useMemo } from 'react';
 import { Search, ChevronRight, FileX } from 'lucide-react';
-
 import { useQuery } from '@tanstack/react-query';
 import { api } from '@/lib/api';
+import { Attendance } from '@/types/attendance';
 
 export type AttendanceStatus = 'Present' | 'Late' | 'Absent' | 'On Leave';
 
@@ -30,7 +30,7 @@ export const AttendanceHistoryTable: React.FC = () => {
     select: (data) => {
       if (!Array.isArray(data)) return [];
       
-      return data.map((item: any) => {
+      return data.map((item: Attendance) => {
         // Map backend status to our frontend status badges
         let status: AttendanceStatus = 'Present';
         if (item.check_in_status === 'Late') status = 'Late';

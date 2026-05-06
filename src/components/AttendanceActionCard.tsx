@@ -65,8 +65,9 @@ export const AttendanceActionCard: React.FC<AttendanceProps> = ({
       
       queryClient.invalidateQueries({ queryKey: ['attendances'] });
       toast.success('Successfully checked in!');
-    } catch (error: any) {
-      toast.error(error?.response?.data?.message || 'Failed to check in');
+    } catch (error: unknown) {
+      const e = error as { response?: { data?: { message?: string } } }
+      toast.error(e?.response?.data?.message || 'Failed to check in');
     } finally {
       setIsCheckingIn(false);
     }
@@ -88,8 +89,9 @@ export const AttendanceActionCard: React.FC<AttendanceProps> = ({
       
       queryClient.invalidateQueries({ queryKey: ['attendances'] });
       toast.success('Successfully checked out!');
-    } catch (error: any) {
-      toast.error(error?.response?.data?.message || 'Failed to check out');
+    } catch (error: unknown) {
+      const e = error as { response?: { data?: { message?: string } } }
+      toast.error(e?.response?.data?.message || 'Failed to check out');
     } finally {
       setIsCheckingOut(false);
     }

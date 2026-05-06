@@ -80,10 +80,11 @@ const MOCK_WEEKLY: WeeklyData[] = [
 
 import { useQuery } from '@tanstack/react-query';
 import { api } from '@/lib/api';
+import { Attendance } from '@/types/attendance';
 
 export const StatsOverview: React.FC<StatsOverviewProps> = () => {
   // Fetch real data from Laravel backend
-  const { data: attendances = [] } = useQuery({
+  const { data: attendances = [] } = useQuery<Attendance[]>({
     queryKey: ['attendances'],
     queryFn: async () => {
       const response = await api.get('/attendances');
@@ -93,7 +94,7 @@ export const StatsOverview: React.FC<StatsOverviewProps> = () => {
 
   // Calculate real metrics based on the backend data
   const totalAttendance = attendances.length;
-  const lateArrivals = attendances.filter((a: any) => a.check_in_status === 'Late').length;
+  const lateArrivals = attendances.filter((a: Attendance) => a.check_in_status === 'Late').length;
   const onTimeRate = totalAttendance > 0 
     ? Math.round(((totalAttendance - lateArrivals) / totalAttendance) * 100) 
     : 0;
