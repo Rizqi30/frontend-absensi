@@ -34,7 +34,7 @@ export default function EmployeePage() {
   })
 
   const { register, handleSubmit, reset, setValue, formState: { errors } } = useForm<EmployeeSchema>({
-    resolver: zodResolver(employeeSchema)
+    resolver: zodResolver(employeeSchema) as any
   })
 
   const createOrUpdate = useMutation({
