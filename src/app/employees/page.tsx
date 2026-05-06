@@ -35,6 +35,7 @@ export default function EmployeePage() {
   })
 
   const { register, handleSubmit, reset, setValue, formState: { errors } } = useForm<EmployeeSchema>({
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     resolver: zodResolver(employeeSchema) as any
   })
 

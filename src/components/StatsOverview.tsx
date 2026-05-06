@@ -33,40 +33,7 @@ export interface StatsOverviewProps {
 }
 
 // Mock Data Defaults
-const MOCK_STATS: StatItem[] = [
-  {
-    id: '1',
-    label: 'Total Attendance',
-    value: '22',
-    trend: 4.5,
-    trendLabel: 'vs last month',
-    iconType: 'calendar',
-  },
-  {
-    id: '2',
-    label: 'Avg. Work Hours',
-    value: '8.4h',
-    trend: 1.2,
-    trendLabel: 'vs last month',
-    iconType: 'clock',
-  },
-  {
-    id: '3',
-    label: 'Late Arrivals',
-    value: '2',
-    trend: -12.5, // Decrease in lates is good, but structurally it's a negative number. We handle coloring in render.
-    trendLabel: 'vs last month',
-    iconType: 'alert',
-  },
-  {
-    id: '4',
-    label: 'On-Time Rate',
-    value: '91%',
-    trend: 2.1,
-    trendLabel: 'vs last month',
-    iconType: 'check',
-  },
-];
+// MOCK_STATS removed as it's unused
 
 const MOCK_WEEKLY: WeeklyData[] = [
   { day: 'Mon', hours: 8.5 },

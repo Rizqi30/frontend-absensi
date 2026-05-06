@@ -21,7 +21,7 @@ export const AttendanceHistoryTable: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
   // Fetch real data from Laravel backend
-  const { data: attendances = [], isLoading } = useQuery({
+  const { data: attendances = [] } = useQuery({
     queryKey: ['attendances'],
     queryFn: async () => {
       const response = await api.get('/attendances');
@@ -192,7 +192,7 @@ export const AttendanceHistoryTable: React.FC = () => {
                     </div>
                     <h3 className="text-sm font-medium text-slate-900">No logs found</h3>
                     <p className="text-sm text-slate-500 mt-1">
-                      We couldn't find any attendance logs matching your search.
+                      We couldn&apos;t find any attendance logs matching your search.
                     </p>
                   </div>
                 </td>
